@@ -29,6 +29,7 @@ public class Servlet extends HttpServlet{
             Optional<String> optName = Optional.ofNullable(req.getParameter("id"));
             resp.setStatus(HttpServletResponse.SC_OK);
             String id = optName.isPresent() ? optName.get() : "";
+            resp.sendRedirect("/hola?id=id");
             Todo todo = Service.getTodo(Integer.parseInt(id));
             List<Todo> listTodo = new ArrayList<>();
             listTodo.add(todo);

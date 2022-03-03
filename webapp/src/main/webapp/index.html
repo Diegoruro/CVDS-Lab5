@@ -3,8 +3,25 @@
 <head>
     <title>Start Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script>
+        function validateForm() {
+          let x = parseInt(document.forms["myForm"]["num"].value);
+          if (typeof x != "number") {
+            alert("Debe ingresar algun valor");
+            return false;
+          }
+          window.location.href = "hola?id="+x;
+        }
+    </script>
 </head>
 <body>
-<h1>Hello World!</h1>
+    <form name="myForm" action="/hola" method="post" onsubmit="return validateForm()">
+        <div>
+            <label>Número:</label>
+            <input type="number" name="num" >
+        </div>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
 </body>
 </html>
