@@ -26,10 +26,9 @@ public class Servlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Writer responseWriter = resp.getWriter();
         try {
-            Optional<String> optName = Optional.ofNullable(req.getParameter("id"));
+            Optional<String> optName = Optional.ofNullable(req.getParameter("num"));
             resp.setStatus(HttpServletResponse.SC_OK);
             String id = optName.isPresent() ? optName.get() : "";
-            resp.sendRedirect("/hola?id=id");
             Todo todo = Service.getTodo(Integer.parseInt(id));
             List<Todo> listTodo = new ArrayList<>();
             listTodo.add(todo);
@@ -47,7 +46,23 @@ public class Servlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-
+        Writer responseWriter = resp.getWriter();
+        try {
+            Optional<String> optName = Optional.ofNullable(req.getParameter("num"));
+            resp.setStatus(HttpServletResponse.SC_OK);
+            String id = optName.isPresent() ? optName.get() : "";
+            Todo todo = Service.getTodo(Integer.parseInt(id));
+            List<Todo> listTodo = new ArrayList<>();
+            listTodo.add(todo);
+            String json = Service.todosToHTMLTable(listTodo);
+            responseWriter.write(json);
+            responseWriter.flush();
+        }catch (MalformedURLException e){
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }catch (FileNotFoundException e){
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        } catch (Exception e){
+            resp.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+        }
     }
-
 }

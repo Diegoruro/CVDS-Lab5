@@ -10,15 +10,14 @@
             alert("Debe ingresar algun valor");
             return false;
           }
-          window.location.href = "hola?id="+x;
         }
     </script>
 </head>
 <body>
-    <form name="myForm" action="/hola" method="post" onsubmit="return validateForm()">
+    <form name="myForm" action="hola" onsubmit="return validateForm()" method="post">
         <div>
             <label>Número:</label>
-            <input type="number" name="num" >
+            <input type="number" name="num" required>
         </div>
         <br>
         <input type="submit" value="Enviar">
