@@ -7,6 +7,7 @@
 
 <h:head></h:head>
 <h:body>
+    <h1>Calculadora Estadística</h1>
     <h:form id="calculadora_form">
 
         <p:outputLabel style="display:none;">
@@ -16,22 +17,28 @@
         </p:inputText>
         <p:commandButton actionListener="#{CalculadoraBean.setNums(input.value)}" value="send">
         </p:commandButton>
+        <h2>Operación</h2>
+        <br/>
         <p:selectOneButton value="#{CalculadoraBean.type}">
-            <f:selectItem itemLabel="Mode" itemValue="Mode"/>
-            <f:selectItem itemLabel="Mean" itemValue="Mean"/>
+            <f:selectItem itemLabel="Moda" itemValue="Mode"/>
+            <f:selectItem itemLabel="Mean" itemValue="Media"/>
             <f:selectItem itemLabel="Standart Deviation" itemValue="StandartDeviation"/>
             <f:selectItem itemLabel="Variance" itemValue="Variance"/>
         </p:selectOneButton>
+        <br/>
+
         <p:outputLabel>
 
         </p:outputLabel>
-
+        <br/>
         <p:commandButton update="calculadora_form" actionListener="#{CalculadoraBean.calculate}" value="submit">
 
         </p:commandButton>
         <p:commandButton update="calculadora_form" actionListener="#{CalculadoraBean.restart}" value="reset">
 
         </p:commandButton>
+        <br/>
+        <h2>Resultado</h2>
         <ui:repeat var="item" varStatus="status" value="#{CalculadoraBean.result}">
             <h:panelGrid columns="1">
                 #{item}

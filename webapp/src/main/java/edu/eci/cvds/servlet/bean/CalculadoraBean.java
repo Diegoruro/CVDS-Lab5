@@ -23,7 +23,7 @@ public class CalculadoraBean {
                 this.setResult(calculateMean());
                 break;
             case "StandartDeviation":
-                calculateStandartDeviation();
+                this.setResult(calculateStandartDeviation());
                 break;
             case "Mode":
                 this.setResult(calculateMode());
@@ -43,7 +43,10 @@ public class CalculadoraBean {
         return res;
     }
 
-    public void calculateStandartDeviation(){
+    public double calculateStandartDeviation(){
+        double variance = calculateVariance();
+        double standartDesviation = Math.sqrt(variance);
+        return  standartDesviation;
     }
 
     public double calculateVariance(){
