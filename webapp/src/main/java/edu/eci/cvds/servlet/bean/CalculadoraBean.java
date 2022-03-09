@@ -20,33 +20,44 @@ public class CalculadoraBean {
     public void calculate(){
         switch (type){
             case "Mean":
-                calculateMean();
+                this.setResult(calculateMean());
                 break;
             case "StandartDeviation":
                 calculateStandartDeviation();
                 break;
             case "Mode":
-                calculateMode();
+                this.setResult(calculateMode());
                 break;
             case "Variance":
-                calculateVariance();
+                this.setResult(calculateVariance());
                 break;
         }
     }
 
-    public void calculateMean(){
-
+    public double calculateMean(){
+        int sum=0;
+        for (int num:nums) {
+            sum+=num;
+        }
+        double res = (double) sum/nums.size();
+        return res;
     }
 
     public void calculateStandartDeviation(){
-
     }
 
-    public void calculateVariance(){
+    public double calculateVariance(){
+        double mean = calculateMean();
+        double sum=0;
+        for (int num:nums) {
+            sum += Math.pow(num-mean,2f);
+        }
+        double res = sum/nums.size();
 
+        return res;
     }
 
-    public void calculateMode(){
+    public double calculateMode(){
         int valueAppear1;
         int valueAppear2=0;
         int mode=0;
@@ -68,8 +79,7 @@ public class CalculadoraBean {
         if (!manyModes){
             mode=0;
         }
-        setResult(mode);
-        System.out.println(this.result);
+        return mode;
     }
 
     public void restart(){
