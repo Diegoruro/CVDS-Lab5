@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head></h:head>
+<h:body>
+    <h:form id="calculadora_form">
+
+        <p:outputLabel style="display:none;">
+
+        </p:outputLabel>
+        <p:inputText binding="#{input}">
+        </p:inputText>
+        <p:commandButton actionListener="#{CalculadoraBean.setNums(input.value)}" value="send">
+        </p:commandButton>
+        <p:selectOneButton value="#{CalculadoraBean.type}">
+            <f:selectItem itemLabel="Mode" itemValue="Mode"/>
+            <f:selectItem itemLabel="Mean" itemValue="Mean"/>
+            <f:selectItem itemLabel="Standart Deviation" itemValue="StandartDeviation"/>
+            <f:selectItem itemLabel="Variance" itemValue="Variance"/>
+        </p:selectOneButton>
+        <p:outputLabel>
+
+        </p:outputLabel>
+
+        <p:commandButton update="calculadora_form" actionListener="#{CalculadoraBean.calculate}" value="submit">
+
+        </p:commandButton>
+        <p:commandButton update="calculadora_form" actionListener="#{CalculadoraBean.restart}" value="reset">
+
+        </p:commandButton>
+        <ui:repeat var="item" varStatus="status" value="#{CalculadoraBean.result}">
+            <h:panelGrid columns="1">
+                #{item}
+            </h:panelGrid>
+        </ui:repeat>
+    </h:form>
+</h:body>
+</html>
