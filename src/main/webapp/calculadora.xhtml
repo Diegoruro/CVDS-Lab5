@@ -5,45 +5,57 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
 
-<h:head></h:head>
+<h:head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #2c365e;
+        }
+        #calculadora_form {
+            margin: auto;
+            top: 50%;
+            width: 50%;
+            border: 3px solid ;
+            background-color: #4b8f8c;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</h:head>
 <h:body>
-    <h1>Calculadora Estadística</h1>
     <h:form id="calculadora_form">
+        <h1>Calculadora Estadística</h1>
 
-        <p:outputLabel style="display:none;">
+        <p:outputLabel style="display:none;"/>
 
-        </p:outputLabel>
-        <p:inputText binding="#{input}">
-        </p:inputText>
-        <p:commandButton actionListener="#{CalculadoraBean.setNums(input.value)}" value="send">
-        </p:commandButton>
-        <h2>Operación</h2>
+        <p:inputText binding="#{input}"/>
         <br/>
-        <p:selectOneButton value="#{CalculadoraBean.type}">
-            <f:selectItem itemLabel="Moda" itemValue="Mode"/>
-            <f:selectItem itemLabel="Mean" itemValue="Media"/>
-            <f:selectItem itemLabel="Standart Deviation" itemValue="StandartDeviation"/>
-            <f:selectItem itemLabel="Variance" itemValue="Variance"/>
+        <p:commandButton actionListener="#{CalculadoraBean.setNums(input.value)}" value="Guardar valores" style="background-color: #484d6d; border: 2px solid black;"/>
+
+        <h2>Operación</h2>
+        <p:selectOneButton value="#{CalculadoraBean.type}" style=" border: 2px solid black;">
+            <f:selectItem itemLabel="Moda" itemValue="Mode" />
+            <f:selectItem itemLabel="Media" itemValue="Mean" />
+            <f:selectItem itemLabel="Desviación Estándar" itemValue="StandartDeviation" />
+            <f:selectItem itemLabel="Varianza" itemValue="Variance" />
         </p:selectOneButton>
         <br/>
 
-        <p:outputLabel>
-
-        </p:outputLabel>
+        <p:outputLabel/>
         <br/>
-        <p:commandButton update="calculadora_form" actionListener="#{CalculadoraBean.calculate}" value="submit">
 
-        </p:commandButton>
-        <p:commandButton update="calculadora_form" actionListener="#{CalculadoraBean.restart}" value="reset">
-
-        </p:commandButton>
+        <p:commandButton update="calculadora_form" actionListener="#{CalculadoraBean.calculate}" value="Calcular" style="background-color: #484d6d; border: 2px solid black;"/>
         <br/>
+        <p:commandButton update="calculadora_form" actionListener="#{CalculadoraBean.restart}" value="Reiniciar" style="background-color: #484d6d; border: 2px solid black;"/>
+
         <h2>Resultado</h2>
         <ui:repeat var="item" varStatus="status" value="#{CalculadoraBean.result}">
             <h:panelGrid columns="1">
                 #{item}
             </h:panelGrid>
         </ui:repeat>
+        <br/>
     </h:form>
 </h:body>
 </html>
